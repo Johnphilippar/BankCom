@@ -15,9 +15,21 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
     location: {
-        type: String,
-        required: true
+        type: String
     },
+    // location: [
+    //     {
+    //         city: {
+    //             type: String,
+    //         },
+    //         streetAddress: {
+    //             type: String,
+    //         },
+    //         country: {
+    //             type: String,
+    //         },
+    //     }
+    // ],
     date: {
         type: Date,
         default: Date.now

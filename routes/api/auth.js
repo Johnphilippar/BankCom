@@ -5,11 +5,11 @@ const User = require('../../model/User')
 const bcrypt = require('bcryptjs')
 const { check, validationResult } = require("express-validator");
 const config = require('config');
-const jwt = require('jsonwebtoken ')
+const jwt = require('jsonwebtoken')
 
 
 // @route   GET api/auth
-// @desc    Authenticate user and get token
+// @desc    Authenticate user and get token and get the user.
 // @access  Public
 router.get('/' , auth , async (req,res) => {
     try {
@@ -21,8 +21,22 @@ router.get('/' , auth , async (req,res) => {
     }
 })
 
+// @route   GET api/auth/profiles
+// @desc    Get all the users
+// @access  Public
+router.get('/profiles' , async (req,res) => {
+  try {
+      const user = await User.find().select('-password')
+      res.json(user);
+  } catch (err) {
+      console.error(err.message)
+      res.status(500).send('Server Error')
+  }
+})
+
+
 // @route   POST api/auth
-// @desc    Authenticate user and get token
+// @desc    Authenticate user and get token or Login
 // @access  Public
 router.post("/", [
     check('email', 'Please enter a valid email').isEmail(),
