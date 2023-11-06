@@ -1,6 +1,4 @@
 import React, { Fragment  , useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faHippo } from "@fortawesome/free-solid-svg-icons";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
@@ -19,9 +17,11 @@ if(localStorage.token){
   setAuthToken(localStorage.token)
 }
 
-
-
 const App = () => {
+
+  
+
+
 
   useEffect(() => {
     store.dispatch(loadUser())
