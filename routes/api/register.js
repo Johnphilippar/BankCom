@@ -10,7 +10,7 @@ const config = require('config');
 // @desc    Register an account
 // @access  Public
 router.post("/", [
-  check('name', 'Name is required').not(),
+  check('name', 'Name is required').notEmpty(),
   check('email', 'Please enter a valid email').isEmail(),
   check('password', 'Please enter a password with more than 6 characters').isLength({ min: 6 })
 ] , async (req, res) => {
