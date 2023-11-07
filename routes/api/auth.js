@@ -34,6 +34,31 @@ router.get('/profiles' , async (req,res) => {
   }
 })
 
+router.put(
+  '/editprofile',
+  auth,
+  check('name', 'Name is required').notEmpty(),
+  check('location', 'Location is required').notEmpty(),
+  check('email', 'Email is required').notEmpty(),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      const user = await User.findOne({ user: req.user.id });
+
+      await user.save();
+
+      res.json(user);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
 
 // @route   POST api/auth
 // @desc    Authenticate user and get token or Login

@@ -26,7 +26,7 @@ const Register = ({setAlert , register , isAuthenticated}) => {
             setAlert('Password do not match' , 'danger')
         }else{
 
-          register({ name , email , password });
+          register({ name , email , password , location });
 
             // Sample registration inside the components
             // const newUser = {
